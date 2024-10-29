@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>책임 의사 이상</title>
+    <style>
+        /* 기본 설정 */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #ffffff;
+            color: #000000;
+            font-family: "Noto Sans KR", sans-serif;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* 컨테이너 및 텍스트 스타일 */
+        .container {
+            max-width: 600px;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        #typing {
+            font-size: 1.5rem;
+            white-space: pre-wrap;
+            display: inline-block;
+        }
+
+        .footer {
+            font-size: 1rem;
+            margin-top: 1rem;
+            color: #666;
+        }
+
+        /* 버튼 스타일 */
+        .button {
+            padding: 8px 16px;
+            font-size: 1.2em;
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .button:hover {
+            background-color: #007bff;
+            transform: scale(1.05);
+        }
+
+        /* 버튼 고정 위치 설정 */
+        .fixed-button {
+            position: fixed;
+            bottom: 20px;
+        }
+
+        #goToFirst {
+            left: 20px;
+        }
+
+        #goToCredit {
+            right: 20px;
+        }
+
+        /* 모달 스타일 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+            color: #000000;
+            background-color: #e3e3e3;
+            text-align: center;
+            padding-top: 5%;
+            font-size: 20px;
+            font-family: 'Helvetica', Arial, sans-serif;
+        }
+
+        /* 크레딧 모달 버튼 하단 배치 */
+        #credit-modal button {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">오감도</h1>
+        <div id="typing"></div>
+        <div class="footer"></div>
+    </div>
+
+    <!-- 고정 버튼 -->
+    <button class="button fixed-button" id="goToFirst">Go to First</button>
+    <button class="button fixed-button" id="goToCredit">Credit</button>
+
+    <div id="credit-modal" class="modal">
+        <h2>Credits</h2>
+        <p>오감도는 세상을 진단하는 도구, 2024<br>Web interaction Design</p>
+        <br>김서영 @soyongkeem All Right reserved.</p>
+        <button class="button" id="closeCredit">Close</button>
+    </div>
+
+    <script>
+        const text = `
+환자의 용태에 관한 문제.
+진단0·1
+　26·10·1931
+　　이상 책임의사 이 상
+        `;
+
+        let index = 0;
+        const typingElement = document.getElementById('typing');
+
+        function type() {
+            typingElement.innerText = text.slice(0, index);
+            index++;
+            if (index <= text.length) {
+                setTimeout(type, 100);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            type();
+        });
+
+        // 페이지 이동 및 모달 열고 닫기 이벤트
+        document.getElementById('goToFirst').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+
+        document.getElementById('goToCredit').addEventListener('click', function() {
+            document.getElementById('credit-modal').style.display = 'block';
+        });
+
+        document.getElementById('closeCredit').addEventListener('click', function() {
+            document.getElementById('credit-modal').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
